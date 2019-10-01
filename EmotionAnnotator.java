@@ -20,7 +20,8 @@ import java.util.*;
 
 public class EmotionAnnotator implements Annotator {
 
-    public static final String LEXICON_DEPECHEMOOD = Constants.emotionLexicon;
+    // path to the lexicon file
+    public static final String LEXICON_DEPECHEMOOD = "DepecheMood_english_token_full.tsv";
     private Map<String, double[]> lexiconMap;
 
     public EmotionAnnotator(String name, Properties properties) {
@@ -66,6 +67,7 @@ public class EmotionAnnotator implements Annotator {
         Map<String, double[]> result = new HashMap<>();
         try (Reader reader = Files.newBufferedReader(Paths.get(LEXICON_DEPECHEMOOD))) {
 
+            // https://mvnrepository.com/artifact/com.opencsv/opencsv
             CSVParser parser = new CSVParserBuilder().withSeparator('\t').withIgnoreQuotations(true).build();
             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).withCSVParser(parser).build();
 
